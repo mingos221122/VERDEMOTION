@@ -141,30 +141,26 @@
     }
 
     function submitEmail(e) {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const statusMsg = document.getElementById('statusMsg');
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const statusMsg = document.getElementById('statusMsg');
 
-      const formData = new FormData();
-      formData.append("email", email);
+  const formData = new FormData();
+  formData.append("email", email);
 
-      fetch("https://script.google.com/macros/s/AKfycbzmdQlVdSPpI5YE5Lttj4nL4fmRhlY2_dunxPtX2fAXjq48Js-5ut6x6fIRcr4xlWWPGA/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ email })
-})
-.then(res => res.text())
-.then(response => {
-  statusMsg.innerText = "Grazie! Sei stato registrato con successo.";
-  document.getElementById('email').value = "";
-})
-.catch(error => {
-  console.error("Errore fetch:", error);
-  statusMsg.innerText = "Errore durante l'invio. Riprova.";
-});
-
+  fetch("https://script.google.com/macros/s/AKfycbzmdQlVdSPpI5YE5Lttj4nL4fmRhlY2_dunxPtX2fAXjq48Js-5ut6x6fIRcr4xlWWPGA/exec", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(response => {
+    statusMsg.innerText = "Grazie! Sei stato registrato con successo.";
+    document.getElementById('email').value = "";
+  })
+  .catch(error => {
+    console.error("Errore fetch:", error);
+    statusMsg.innerText = "Errore durante l'invio. Riprova.";
+  });
     }
   </script>
 </body>
