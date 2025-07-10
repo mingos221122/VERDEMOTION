@@ -105,11 +105,12 @@
       Coltiva il tuo benessere emotivo, un fiore alla volta.
     </p>
 
-    <form onsubmit="submitEmail(event)">
-      <input type="email" id="email" placeholder="Inserisci la tua email" required />
+    <!-- ✅ Formspree form -->
+    <form action="https://formspree.io/f/mgvygeqz" method="POST">
+      <input type="email" name="email" placeholder="Inserisci la tua email" required />
       <input type="submit" value="Unisciti alla Beta" />
     </form>
-    <p id="statusMsg"></p>
+    <p style="margin-top: 10px;">Riceverai una conferma appena iscrittə!</p>
 
     <div class="features">
       <div class="feature">
@@ -138,29 +139,6 @@
       document.querySelectorAll('[data-it]').forEach(el => {
         el.textContent = el.getAttribute(`data-${lang}`);
       });
-    }
-
-    function submitEmail(e) {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const statusMsg = document.getElementById('statusMsg');
-
-  const formData = new FormData();
-  formData.append("email", email);
-
-  fetch("https://script.google.com/macros/s/AKfycbzmdQlVdSPpI5YE5Lttj4nL4fmRhlY2_dunxPtX2fAXjq48Js-5ut6x6fIRcr4xlWWPGA/exec", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.text())
-  .then(response => {
-    statusMsg.innerText = "Grazie! Sei stato registrato con successo.";
-    document.getElementById('email').value = "";
-  })
-  .catch(error => {
-    console.error("Errore fetch:", error);
-    statusMsg.innerText = "Errore durante l'invio. Riprova.";
-  });
     }
   </script>
 </body>
